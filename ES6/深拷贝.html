@@ -34,7 +34,7 @@
   function deepClone (target) {
     // 基本数据类型直接返回
     const type = getType(target)
-    let clone = null 
+    let clone = null
     if (type === 'Object') {
       clone = {}
     } else if (type === 'Array') {
@@ -61,6 +61,15 @@
   console.log()
   console.log(whh)
   console.log()
+
+  function fn () {
+    this.name = "xiaozhang"
+    return function fm () {
+      this.name = "xiaoli"
+    }
+  }
+  var f1 = new fn()
+  console.log(f1.name)
 
 
 </script>
