@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>员工列表</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body a {
+      text-decoration: none;
+      color: #0d3a4b;
+    }
+
+    .active {
+      color: #ffffff;
+    }
+
+    .wrap {
+      width: 700px;
+      height: 500px;
+      background-color: skyblue;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .wrap #table {
+      width: 460px;
+      border-radius: 12px;
+      position: absolute;
+      left: 50%;
+      top: 160px;
+      transform: translateX(-50%);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .wrap #table thead {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      color: #fff;
+      background: #4cbfe5;
+    }
+
+    .wrap #table thead a {
+      color: #fff;
+    }
+
+    .wrap #table tbody {
+      color: #19c2ff;
+    }
+
+    .wrap #table tbody a {
+      color: #19c2ff;
+    }
+
+    .wrap #table tbody tr {
+      background: #fff;
+    }
+
+    .ctrl {
+      position: absolute;
+      left: 200px;
+      top: 100px;
+    }
+
+    .ctrl div {
+      width: 300px;
+      line-height: 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    h1 {
+      text-align: center;
+      padding-top: 20px;
+      color: white;
+    }
+
+    #table td {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>员工列表</h1>
+    <div class="ctrl">
+      <div class="age_sort nu">
+        <a desc="desc" href="javascript:;">年龄从小到大</a>
+        <a desc="asc" href="javascript:;">年龄从大到小</a>
+        <a desc="default" href="javascript:;" class="active">默认排序</a>
+      </div>
+      <div class="gender_show">
+        <a gender="男" href="javascript:;">只显示男性</a>
+        <a gender="女" href="javascript:;">只显示女性</a>
+        <a gender="all" href="javascript:;" class="active">默认</a>
+      </div>
+    </div>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <th>小明</th>
+          <th>24</th>
+          <th>男</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    var data = [
+      {
+        id: 1,
+        name: '小明',
+        age: 24,
+        gender: '男'
+      },
+      {
+        id: 2,
+        name: '小芳',
+        age: 30,
+        gender: '女'
+      },
+      {
+        id: 3,
+        name: '小美',
+        age: 31,
+        gender: '女'
+      },
+      {
+        id: 4,
+        name: '小刚',
+        age: 21,
+        gender: '男'
+      },
+      {
+        id: 5,
+        name: '小琪',
+        age: 18,
+        gender: '女'
+      }
+    ];
+
+    // 数据驱动
+
+    const tbody = document.querySelector('#table tbody')
+    const btn1 = document.querySelectorAll('.age_sort.nu a')
+    const btn2 = document.querySelectorAll('.gender_show a')
+
+    // 添加按钮高亮
+    // 单独功能
+
+    let btns = [...btn1, ...btn2]
+
+    Array.prototype.forEach.call(btns, (item) => {
+      item.onclick = () => {
+        Array.prototype.forEach.call(btns, (item) => {
+          item.classList.remove('active')
+        })
+        item.classList.add('active')
+      }
+    })
+
+    // 年龄排序
+    Array.prototype.forEach.call(btn1, element => {
+      element.addEventListener('click', () => {
+        // 获取 不用的按钮 id 代表不同功能
+        const desc = element.attributes['desc'].value
+        let arr = data
+        arr.sort(compare('age', desc == 'desc' ? true : false))
+        render(arr)
+      })
+    })
+
+    // 性别筛选
+    Array.prototype.forEach.call(btn2, element => {
+      element.addEventListener('click', () => {
+        // 获取 不用的按钮 id 代表不同功能
+        const filter = element.attributes['gender'].value
+        if (filter == 'all') return render(data)
+        let arr = data.filter(({ gender }) => gender == filter)
+        render(arr)
+      })
+    })
+
+    // 自定义排序
+    const compare = (key, desc) => (a, b) => {
+      let value1 = a[key]
+      let value2 = b[key]
+      if (desc == true) return value1 - value2
+      else return value2 - value1
+    }
+
+    // 渲染函数
+    const render = (dataSourse = []) => {
+      tbody.innerHTML = ''
+      dataSourse.forEach((item) => {
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+              <td>${item.id}</td>                                                      
+              <td>${item.name}</td>                                                      
+              <td>${item.age}</td>                                                      
+              <td>${item.gender}</td>                                                      
+          `
+        tbody.appendChild(tr)
+      })
+    }
+
+    // 初始化
+    render(data)
+
+  </script>
+</body>
+
+</html>

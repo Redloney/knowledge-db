@@ -1,11 +1,22 @@
 let arr = [{ name: '小明', age: 18 }, 'Hello World ~', 100, null, undefined]
 
 // forEach 实现
-Array.prototype.forEach = function (callback) {
+// Array.prototype.forEach = function (callback) {
+//   for (let i = 0; i < this.length; i++) {
+//     callback(this[i], i, this)
+//   }
+// }
+
+Array.prototype.forEach = (callback) => {
+  console.log(this)
   for (let i = 0; i < this.length; i++) {
     callback(this[i], i, this)
   }
 }
+
+arr.forEach((item) => {
+  console.log(item)
+})
 
 // map 实现
 Array.prototype.map = function (callback) {
@@ -21,10 +32,16 @@ Array.prototype.map = function (callback) {
 Array.prototype.every = function (callback) {
   if (this.length < 1) return true
   for (let i = 0; i < this.length; i++) {
+    console.log(i)
     if (!callback(this[i], i, this)) return false
   }
   return true
 }
+
+// let array = [1, 2, 3, 4, 5]
+ // array.every(item => {
+//   return item
+// })
 
 // some 实现
 Array.prototype.some = function (callback) {

@@ -2,6 +2,7 @@
 
 let obj = {
   name: '小明',
+  calss: undefined,
   color: ['red', 'blue', 'pink']
 }
 
