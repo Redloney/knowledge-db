@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #333;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.tabs {
+  background-color: #fff;
+  min-height: 200px;
+}
+
+.tabs_nav {
+  display: flex;
+  align-items: center;
+}
+
+.tabs_nav .nav.active {
+  background-color: tomato;
+  color: #fff;
+}
+
+.tabs_nav .nav {
+  display: inline-block;
+  padding: 5px 10px;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #d1d8e0;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabs_nav .nav:hover {
+  background-color: tomato;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.tabs_body {
+  position: relative;
+}
+
+.tabs_body .content.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tabs_body .content {
+  height: 100px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  color: #333;
+}
+
+.toggle {
+  display: block;
+  display: flex;
+  align-items: center;
+}
+
+.toggle button {
+  width: 50%;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #333;
+  font-size: 12px;
+  border: 1px solid #3333;
+  cursor: pointer;
+}
