@@ -1,0 +1,84 @@
+<body></body>
+<script type="module">
+
+  import { PromiseAll, PromiseRace, PromiseAny, allSettled } from './promise.js'
+
+  // 测试
+  const pro1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('1')
+    }, 1000)
+  })
+  const pro2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('2')
+    }, 2000)
+  })
+  const pro3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('3')
+    }, 3000)
+  })
+
+  const p1 = Promise.reject(1)
+  const p2 = Promise.resolve(2)
+  const p3 = Promise.resolve(3)
+  const p4 = Promise.reject(4)
+  
+  // 原生
+  // const p = Promise.all([pro1, pro2, pro3])
+  // console.log({ p })
+  // p.then((value) => {
+  //   console.log('p', value)
+  // })
+
+  // 重写
+  // const pp = PromiseAll([pro1, pro2, pro3])
+  // console.log({ pp })
+  // pp.then((value) => {
+  //   console.log('pp', value)
+  // })
+
+  // 原生
+  // const p = Promise.race([pro1, pro2, pro3])
+  // console.log(p)
+  // p.then((value) => {
+  //   console.log(value)
+  // })
+
+  // 重写
+  // const pp = PromiseRace([pro1, pro2, pro3])
+  // console.log(pp);
+  // pp.then((value) => {
+  //   console.log(value);
+  // })
+
+  // 原生
+  // const p = Promise.any([p1, p2, p3, p4])
+  // console.log(p);
+  // p.then((value) => {
+  //   console.log(value);
+  // })
+
+  // 重写
+  // const p = PromiseAny([p1, p2, p3, p4])
+  // console.log(p);
+  // p.then((value) => {
+  //   console.log(value);
+  // })
+
+  // 原生
+  // const p = Promise.allSettled([p1,p2,p3,p4])
+  // console.log(p);
+  // p.then((value) => {
+  //   console.log(value);
+  // })
+
+  // 重写
+  // const pp = allSettled([p1, p2, p3, p4])
+  // console.log(pp);
+  // pp.then((value) => {
+  //   console.log(value);
+  // })
+
+</script>
